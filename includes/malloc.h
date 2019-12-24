@@ -13,15 +13,15 @@
   #define PTR64
 
 #ifdef PTR16
-#define align(x) (((((x) - 1) >> 1) << 1) + 2)
+#define ALIGN(x) (((((x) - 1) >> 1) << 1) + 2)
 #endif
 
 #ifdef PTR32
-#define align(x) (((((x) - 1) >> 2) << 2) + 4)
+#define ALIGN(x) (((((x) - 1) >> 2) << 2) + 4)
 #endif
 
 #ifdef PTR64
-#define align(x) (((((x) - 1) >> 3) << 3) + 8)
+#define ALIGN(x) (((((x) - 1) >> 3) << 3) + 8)
 #endif
 
 typedef struct	s_block_header
@@ -34,6 +34,15 @@ typedef struct	s_block_header
 	char					data[1];
 
 }				*t_block_header;
+
+typedef struct	s_malloc
+{
+	t_block_header			tiny_malloc;
+	t_block_header			small_malloc;
+	t_block_header			big_malloc;
+}				t_malloc;
+
+t_malloc					g_malloc;
 
 #define HEADER_SIZE sizeof(t_block_header) - sizeof(char*);
 
