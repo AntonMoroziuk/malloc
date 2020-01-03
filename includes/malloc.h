@@ -27,6 +27,7 @@
 typedef struct	s_block_header
 {
 	size_t					size;
+	size_t					used;
 	struct s_block_header	*next;
 	struct s_block_header	*prev;
 	void					*magic;
@@ -39,12 +40,15 @@ typedef struct	s_malloc
 {
 	t_block_header			tiny_malloc;
 	t_block_header			small_malloc;
-	t_block_header			big_malloc;
+	void					*tiny_area;
+	void					*tiny_area_end;
+	void					*small_area;
+	void					*small_area_end;
 }				t_malloc;
 
 t_malloc					g_malloc;
 
-#define HEADER_SIZE sizeof(t_block_header) - sizeof(char*);
+#define HEADER_SIZE (sizeof(t_block_header) - sizeof(char*))
 
 void	free(void *ptr);
 void	*malloc(size_t size);

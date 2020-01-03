@@ -3,7 +3,7 @@
 
 #include <malloc.h>
 
-void	*split_block(t_block_header block, size_t size)
-{
-	
-}
+void	*split_block(t_block_header block, size_t size);
+void	*new_block(t_block_header block, size_t size, void *max_addr);
+
+#endif
